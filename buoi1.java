@@ -27,4 +27,5 @@ public class Test{
         System.out.printf("Chu vi = %d \n",CV);
         System.out.printf("Dien tich = %d \n",S);
 }
+
 }
