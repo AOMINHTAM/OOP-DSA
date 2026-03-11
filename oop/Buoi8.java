@@ -103,6 +103,79 @@ class Customer extends Person {
         System.out.println("Name: " + getName() + " | Address: " + getAddress() + " | Balance: " + balance);
     }
 }
+//bai 4
+abstract class PhuongTienDiChuyen {
+    protected String loaiPhuongTien;
+
+    public PhuongTienDiChuyen(String loaiPhuongTien) {
+        this.loaiPhuongTien = loaiPhuongTien;
+    }
+
+    public void batDau() {
+        System.out.println(loaiPhuongTien + ": Bat dau khoi hanh.");
+    }
+
+    public void tangToc() {
+        System.out.println(loaiPhuongTien + ": Dang tang toc nhanh dan.");
+    }
+
+    public void dungLai() {
+        System.out.println(loaiPhuongTien + ": Da dung han.");
+    }
+
+    // Phương thức trừu tượng: Lớp con bắt buộc phải cài đặt chi tiết
+    abstract double layVanToc();
+}
+
+// 2. Lớp Máy Bay
+class MayBay extends PhuongTienDiChuyen {
+    private String loaiNhienLieu;
+
+    public MayBay(String loaiPhuongTien, String loaiNhienLieu) {
+        super(loaiPhuongTien);
+        this.loaiNhienLieu = loaiNhienLieu;
+    }
+
+    public void catCanh() {
+        System.out.println(loaiPhuongTien + " dang cat canh voi nhien lieu " + loaiNhienLieu);
+    }
+
+    public void haCanh() {
+        System.out.println(loaiPhuongTien + " dang ha canh.");
+    }
+
+    @Override
+    double layVanToc() {
+        return 900.0; // Vận tốc giả định của máy bay
+    }
+}
+
+// 3. Lớp Xe Ô tô
+class XeOto extends PhuongTienDiChuyen {
+    private String loaiNhienLieu;
+
+    public XeOto(String loaiPhuongTien, String loaiNhienLieu) {
+        super(loaiPhuongTien);
+        this.loaiNhienLieu = loaiNhienLieu;
+    }
+
+    @Override
+    double layVanToc() {
+        return 120.0; // Vận tốc giả định của ô tô
+    }
+}
+
+// 4. Lớp Xe Đạp
+class XeDap extends PhuongTienDiChuyen {
+    public XeDap(String loaiPhuongTien) {
+        super(loaiPhuongTien);
+    }
+
+    @Override
+    double layVanToc() {
+        return 20.0; // Vận tốc giả định của xe đạp
+    }
+}
 public class Buoi8{
 
     public static void main(String[] args) {
@@ -130,6 +203,29 @@ public class Buoi8{
         Person c1 = new Customer("Tran Thi B", "TP.HCM", 500);
         e1.display();
         c1.display();
+        // bai 4
+        MayBay mb = new MayBay("May Bay Dan Dung", "Xang Jet A1");
+        XeOto oto = new XeOto("Xe O To 4 Cho", "Xang A95");
+        XeDap xd = new XeDap("Xe Dap The Thao");
+
+        // Chạy thử Máy Bay
+        mb.batDau();
+        mb.catCanh();
+        System.out.println("Van toc: " + mb.layVanToc() + " km/h");
+        mb.haCanh();
+        System.out.println("-------------------------");
+
+        // Chạy thử Ô tô
+        oto.batDau();
+        oto.tangToc();
+        System.out.println("Van toc: " + oto.layVanToc() + " km/h");
+        oto.dungLai();
+        System.out.println("-------------------------");
+
+        // Chạy thử Xe đạp
+        xd.batDau();
+        System.out.println("Van toc: " + xd.layVanToc() + " km/h");
+        xd.dungLai();
     }
 
 
